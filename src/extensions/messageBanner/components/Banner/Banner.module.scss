@@ -1,0 +1,20 @@
+.BannerContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: height 250ms;
+  flex: 1;
+  font-weight: 600;
+  cursor: default;
+  border-bottom: 1px solid #eaeaea;
+
+  a, a:link, a:visited, a:hover, a:active {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}
