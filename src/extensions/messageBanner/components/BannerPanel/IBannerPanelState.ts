@@ -1,6 +1,6 @@
-import { MessageBannerSettings } from "../../../../models/MessageBannerSettings";
+import { IMessageBannerProperties } from "../../../../models/IMessageBannerProperties";
 
 export interface IBannerPanelState {
   errorMessage?: string;
-  settings: MessageBannerSettings;
+  settings: IMessageBannerProperties;
 }

@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
-    <CustomAction
-        Title="MessageBanner"
-        Location="ClientSideExtension.ApplicationCustomizer"
-        ClientSideComponentId="1e2688c4-99d8-4897-8871-a9c151ccfc87"
-        ClientSideComponentProperties="{ &quot;message&quot;: &quot;This is a sample banner message. Update the 'message' property of the application customizer extension.&quot;, &quot;textColor&quot;: &quot;#333&quot;, &quot;backgroundColor&quot;: &quot;#ffffc6&quot;, &quot;textFontSizePx&quot;: 14, &quot;bannerHeightPx&quot;: 30 }">
-    </CustomAction>
-</Elements>

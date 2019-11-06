@@ -1,8 +1,9 @@
-import { MessageBannerSettings } from "../../../../models/MessageBannerSettings";
+import { IMessageBannerProperties } from "../../../../models/IMessageBannerProperties";
 
 export interface IBannerPanelProps {
-  settings: MessageBannerSettings;
+  settings: IMessageBannerProperties;
   isOpen: boolean;
+  isSaving: boolean;
   onSave: () => Promise<void>;
   onCancelOrDismiss: () => void;
   onFieldChange: (newSetting: {[ key: string ]: any }) => void;

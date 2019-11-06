@@ -9,23 +9,18 @@ import {
 import * as strings from 'MessageBannerApplicationCustomizerStrings';
 import Banner from './components/Banner/Banner';
 import { IBannerProps } from './components/Banner/IBannerProps';
+import ClientSideComponentService from '../../services/ClientSideComponentService';
+import { IMessageBannerProperties } from '../../models/IMessageBannerProperties';
 
 const LOG_SOURCE: string = 'MessageBannerApplicationCustomizer';
 
-export interface IMessageBannerProperties {
-  message: string;
-  textColor: string;
-  backgroundColor: string;
-  textFontSizePx: number;
-  bannerHeightPx: number;
-}
-
 const DEFAULT_PROPERTIES: IMessageBannerProperties = {
-  message: "This is a sample banner message. Update the 'message' property of the application customizer extension.",
-  textColor: "#333",
+  message: "This is a sample banner message. Click the edit icon on the right side to update the banner settings.",
+  textColor: "#333333",
   backgroundColor: "#ffffc6",
-  textFontSizePx: 14,
-  bannerHeightPx: 50,
+  textFontSizePx: 16,
+  bannerHeightPx: 30,
+  visibleStartDate: null,
 };
 
 /** A Custom Action which can be run during execution of a Client Side Application */
@@ -34,10 +29,14 @@ export default class MessageBannerApplicationCustomizer
 
   private _topPlaceholder: PlaceholderContent;
   private _extensionProperties: IMessageBannerProperties;
+  private _clientSideComponentService: ClientSideComponentService;
 
   @override
   public async onInit(): Promise<void> {
     Log.info(LOG_SOURCE, `Initialized ${strings.Title}`);
+
+    // Init services
+    this._clientSideComponentService = new ClientSideComponentService(this.context);
 
     // Merge passed properties with default properties, overriding any defaults
     this._extensionProperties = { ...DEFAULT_PROPERTIES, ...this.properties };
@@ -75,7 +74,8 @@ export default class MessageBannerApplicationCustomizer
     //Render Banner React component
     const bannerProps: IBannerProps = {
       context: this.context,
-      settings: this._extensionProperties
+      settings: this._extensionProperties,
+      clientSideComponentService: this._clientSideComponentService
     };
     const bannerComponent = React.createElement(Banner, bannerProps);
     ReactDom.render(bannerComponent, this._topPlaceholder.domElement);
