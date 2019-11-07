@@ -1,5 +1,5 @@
 import * as React from 'react';
-const { useState } = React;
+const { useState, useEffect } = React;
 import { IBannerProps } from './IBannerProps';
 import styles from './Banner.module.scss';
 import { IconButton } from 'office-ui-fabric-react/lib/Button';
@@ -11,10 +11,19 @@ import isPast from 'date-fns/isPast';
 import formatDate from 'date-fns/format';
 import { Text } from '@microsoft/sp-core-library';
 
+const EXPERIMENTAL_ENABLE_PREALLOCATEDTOPHEIGHT = true;
+const BANNER_CONTAINER_ID = 'CustomMessageBannerContainer';
+
 const Banner = (props: IBannerProps) => {
   const [settings, setSettings] = useState(props.settings);
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+
+  useEffect(() => {
+    if (EXPERIMENTAL_ENABLE_PREALLOCATEDTOPHEIGHT) {
+      document.getElementById(BANNER_CONTAINER_ID).parentElement.style.height = `${settings.bannerHeightPx}px`;
+    }
+  }, [settings.bannerHeightPx])
 
   const visibleStartDate = settings.visibleStartDate ? new Date(settings.visibleStartDate) : null;
   const isPastVisibleStartDate = settings.visibleStartDate && isPast(visibleStartDate);
@@ -34,7 +43,11 @@ const Banner = (props: IBannerProps) => {
   const handleSave = async (): Promise<void> => {
     try {
       setIsSaving(true);
-      await props.clientSideComponentService.setProperties(settings);
+      let hostProperties = null;
+      if (EXPERIMENTAL_ENABLE_PREALLOCATEDTOPHEIGHT) {
+        hostProperties = { "preAllocatedApplicationCustomizerTopHeight": `${settings.bannerHeightPx}`};
+      }
+      await props.clientSideComponentService.setProperties(settings, hostProperties);
       setIsPanelOpen(false);
       setIsSaving(false);
     }
@@ -66,7 +79,7 @@ const Banner = (props: IBannerProps) => {
   if (visibleStartDate && !isPastVisibleStartDate && !isCurrentUserAdmin) return null;
 
   return (
-    <div style={{ backgroundColor: settings.backgroundColor }}>
+    <div id={BANNER_CONTAINER_ID} style={{ backgroundColor: settings.backgroundColor }}>
       <div className={styles.BannerContainer} style={{ height: settings.bannerHeightPx }}>
         {isCurrentUserAdmin && !!visibleStartDate && (isPastVisibleStartDate
           ? <div className={styles.AdminUserVisibilityBadge}>{strings.BannerBadgeIsVisibleToUsersMessage}</div>

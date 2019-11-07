@@ -9,20 +9,22 @@ class ClientSideComponentService {
     this._context = context;
   }
 
-  public setProperties = async (properties: any): Promise<void> => {
+  public setProperties = async (properties?: any, hostProperties?: any): Promise<void> => {
     const componentId = this._context.manifest.id;
     let customAction = await this._getCustomActionByComponentId(componentId);
     if (!customAction) return;
 
     try {
+      let body = {};
+      if (properties)     body["ClientSideComponentProperties"] = JSON.stringify(properties);
+      if (hostProperties) body["HostProperties"] = JSON.stringify(hostProperties);
+
       await this._context.spHttpClient.post(customAction["@odata.id"], SPHttpClient.configurations.v1, {
         headers: {
           "X-HTTP-Method": "MERGE",
           "content-type": "application/json; odata=nometadata"
         },
-        body: JSON.stringify({
-          "ClientSideComponentProperties": JSON.stringify(properties)
-        })
+        body: JSON.stringify(body)
       });
     } catch (error) {
       const errorMessage = `Unable to update custom action with componentId ${componentId}. ${error.message}`;
