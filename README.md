@@ -5,8 +5,11 @@ Add a custom banner message to your SharePoint Online modern sites. Allows a sit
 Built using a SharePoint Framework Application Customizer Extension with the Top placeholder. Customization settings are saved into the ClientSideComponentProperties of the host custom action. Supports adding at the site-scope or web-scope.
 
 ### Screenshots
+__View as user__
 ![View as a site user](./docs/BannerMessageUserView.png)
+__View as site admin__
 ![View as a site admin](./docs/BannerMessageAdminView.png)
+__View as site admin with a scheduled start date__
 ![View as a site admin with a future scheduled date](./docs/BannerMessageAdminViewScheduled.png)
 
 
@@ -47,7 +50,7 @@ Built using a SharePoint Framework Application Customizer Extension with the Top
 ### Updates
 Follow the same steps as installation. Overwrite the existing package in the 'Apps for SharePoint' library when uploading the new package. 
 
-> __Tip #1__: Be sure to check-in the sppkg file after the deployment if it is left checked-out.
+> __Tip__: Be sure to check-in the sppkg file after the deployment if it is left checked-out.
 
 ## Configuration
 This solution is deployed by registering a custom action on your site(s) at either the site or web scopes. 
