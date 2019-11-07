@@ -15,18 +15,21 @@ import { DatePicker } from 'office-ui-fabric-react/lib/DatePicker';
 import { Toggle } from 'office-ui-fabric-react/lib/Toggle';
 
 const TEXT_COLORS: IColorCellProps[] = [
-  { id: 't1', label: 'Gray', color: '#333333' },
-  { id: 't2', label: 'Red', color: '#ba2a1d' },
+  { id: 't1', label: 'Black', color: '#000000' },
+  { id: 't2', label: 'Red', color: '#ff0000' },
   { id: 't3', label: 'Blue', color: '#1d45ba' },
-  { id: 't5', label: 'White', color: '#ffffff' }
+  { id: 't4', label: 'White', color: '#ffffff' }
 ];
 
 const BACKGROUND_COLORS: IColorCellProps[] = [
-  { id: 'b1', label: 'Light Yellow', color: '#ffffc6' },
-  { id: 'b2', label: 'Cyan', color: '#038387' },
-  { id: 'b3', label: 'Blue Magenta', color: '#8764b8' },
-  { id: 'b4', label: 'Magenta', color: '#881798' },
-  { id: 'b5', label: 'White', color: '#ffffff' }
+  { id: 'b1', label: 'Yellow', color: '#ffff00' },
+  { id: 'b2', label: 'Light Yellow', color: '#ffffc6' },
+  { id: 'b3', label: 'Teal', color: '#038387' },
+  { id: 'b4', label: 'Blue', color: '#0078d4' },
+  { id: 'b5', label: 'Dark Red', color: '#ba2a1d' },
+  { id: 'b6', label: 'Salmon', color: '#e9967a' },
+  { id: 'b7', label: 'Orange', color: '#ff8c00' },
+  { id: 'b8', label: 'White', color: '#ffffff' }
 ];
 
 const BannerPanel = (props: IBannerPanelProps) => {
@@ -71,7 +74,7 @@ const BannerPanel = (props: IBannerPanelProps) => {
         <div className={styles.FieldSection}>
           <Label className={styles.FieldLabel}>{strings.BannerPanelFieldTextColorLabel}</Label>
           <SwatchColorPicker
-            columnCount={5}
+            columnCount={10}
             selectedId={textColorSelectedId}
             cellShape={'circle'}
             colorCells={TEXT_COLORS}
@@ -84,7 +87,7 @@ const BannerPanel = (props: IBannerPanelProps) => {
         <div className={styles.FieldSection}>
           <Label className={styles.FieldLabel}>{strings.BannerPanelFieldBackgroundColorLabel}</Label>
           <SwatchColorPicker
-            columnCount={5}
+            columnCount={10}
             selectedId={backgroundColorSelectedId}
             cellShape={'circle'}
             colorCells={BACKGROUND_COLORS}
