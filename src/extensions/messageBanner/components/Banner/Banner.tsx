@@ -23,7 +23,7 @@ const Banner = (props: IBannerProps) => {
     if (EXPERIMENTAL_ENABLE_PREALLOCATEDTOPHEIGHT) {
       document.getElementById(BANNER_CONTAINER_ID).parentElement.style.height = `${settings.bannerHeightPx}px`;
     }
-  }, [settings.bannerHeightPx])
+  }, [settings.bannerHeightPx]);
 
   const visibleStartDate = settings.visibleStartDate ? new Date(settings.visibleStartDate) : null;
   const isPastVisibleStartDate = settings.visibleStartDate && isPast(visibleStartDate);
