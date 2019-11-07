@@ -16,9 +16,9 @@ const Banner = (props: IBannerProps) => {
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
 
+  const visibleStartDate = settings.visibleStartDate ? new Date(settings.visibleStartDate) : null;
+  const isPastVisibleStartDate = settings.visibleStartDate && isPast(visibleStartDate);
   const isCurrentUserAdmin = props.context.pageContext.web.permissions.hasPermission(SPPermission.manageWeb as any);
-  const visibleStartDate = settings.visibleStartDate && new Date(settings.visibleStartDate);
-  const isViewableByUsers = !settings.visibleStartDate || isPast(visibleStartDate);
 
   const handleOpenClick = (): void => {
     setIsPanelOpen(true);
@@ -63,12 +63,12 @@ const Banner = (props: IBannerProps) => {
 
 
   //If user isn't an admin and there is a future start date, render nothing
-  if (!isViewableByUsers && !isCurrentUserAdmin) return null;
+  if (visibleStartDate && !isPastVisibleStartDate && !isCurrentUserAdmin) return null;
 
   return (
     <div style={{ backgroundColor: settings.backgroundColor }}>
       <div className={styles.BannerContainer} style={{ height: settings.bannerHeightPx }}>
-        {isCurrentUserAdmin && !!visibleStartDate && (isViewableByUsers
+        {isCurrentUserAdmin && !!visibleStartDate && (isPastVisibleStartDate
           ? <div className={styles.AdminUserVisibilityBadge}>{strings.BannerBadgeIsVisibleToUsersMessage}</div>
           : <div className={styles.AdminUserVisibilityBadge}>{Text.format(strings.BannerBadgeNotVisibleToUsersMessage, formatDate(visibleStartDate, 'PPPP'))}</div>
         )}
