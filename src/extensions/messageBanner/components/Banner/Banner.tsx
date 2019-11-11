@@ -72,8 +72,8 @@ const Banner = (props: IBannerProps) => {
 
   const parseTokens = (textWithTokens: string, context: BaseComponentContext): string => {
     const tokens = [
-      { token: '{siteurl}', value: context.pageContext.site.absoluteUrl },
-      { token: '{weburl}', value: context.pageContext.web.absoluteUrl },
+      { token: '{siteUrl}', value: context.pageContext.site.absoluteUrl },
+      { token: '{webUrl}', value: context.pageContext.web.absoluteUrl },
     ];
 
     const outputText = tokens.reduce((text, tokenItem) => {
