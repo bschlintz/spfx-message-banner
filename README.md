@@ -59,7 +59,7 @@ The banner settings are saved into the ClientSideComponentProperties on the cust
 
 | Property Name       | Default Value | Description |
 | ------------------- | ------------- | ----- |
-| message | `"This is a sample banner message. Click the edit icon on the right side to update the banner settings."` | Text or HTML. Supports {siteurl} and {weburl} tokens. |
+| message | `"This is a sample banner message. Click the edit icon on the right side to update the banner settings."` | Text or HTML. Supports {siteUrl} and {webUrl} tokens. |
 | textColor | `"#333333"` | Text color shown within the banner. |
 | backgroundColor | `"#ffffc6"` | Background color of the banner. |
 | textFontSizePx | `14` | Font size of the banner text in pixels. |
@@ -67,7 +67,7 @@ The banner settings are saved into the ClientSideComponentProperties on the cust
 | visibleStartDate | `null`  | Optional. Date string at which the banner message should be shown to members and visitors of the site. Message will always be visible to admins.
 | enableSetPreAllocatedTopHeight | `false`  | Optional. Boolean flag to enable setting the host property 'preAllocatedApplicationCustomizerTopHeight' when saving new banner height within the settings panel. This flag signals SharePoint to pre allocate the banner location height server-side to avoid the page shifting down during render. 
 
-Additionally, if you are a site owner or site collection adminstrator, you can customize the banner using the 'edit' pencil icon via the browser.
+Additionally, if you are a site owner or site collection administrator, you can customize the banner using the 'edit' pencil icon via the browser.
 
 ![External Sharing Banner Screenshot](./docs/BannerSettingsPanel.png)
 

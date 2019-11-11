@@ -5,7 +5,7 @@ define([], function() {
     "BannerBadgeIsVisibleToUsersMessage": "Visible to users now",
     "BannerPanelHeaderText": "Banner Settings",
     "BannerPanelFieldMessageLabel": "Message",
-    "BannerPanelFieldMessageDescription": "You may include basic HTML in your text. Text tokens supported: {siteurl} {webUrl}.",
+    "BannerPanelFieldMessageDescription": "You may include basic HTML in your text. Text tokens supported: {siteUrl} {webUrl}.",
     "BannerPanelFieldBackgroundColorLabel": "Background Color",
     "BannerPanelFieldTextColorLabel": "Text Color",
     "BannerPanelFieldTextSizeLabel": "Text Size",
