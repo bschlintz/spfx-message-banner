@@ -12,7 +12,6 @@ declare interface IMessageBannerApplicationCustomizerStrings {
   BannerPanelFieldVisibleStartDateLabel: string;
   BannerPanelFieldVisibleStartDateEnabledLabel: string;
   BannerPanelFieldVisibleStartDateDisabledLabel: string;
-  // BannerPanelFieldVisibleEndDateLabel: string;
   BannerPanelButtonSaveText: string;
   BannerPanelButtonCancelText: string;
 }

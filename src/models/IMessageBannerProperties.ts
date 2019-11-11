@@ -5,4 +5,5 @@ export interface IMessageBannerProperties {
   textFontSizePx: number;
   bannerHeightPx: number;
   visibleStartDate?: string;
+  enableSetPreAllocatedTopHeight?: boolean;
 }

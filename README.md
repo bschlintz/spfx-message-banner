@@ -65,6 +65,7 @@ The banner settings are saved into the ClientSideComponentProperties on the cust
 | textFontSizePx | `14` | Font size of the banner text in pixels. |
 | bannerHeightPx | `30` | Height of the banner in pixels. |
 | visibleStartDate | `null`  | Optional. Date string at which the banner message should be shown to members and visitors of the site. Message will always be visible to admins.
+| enableSetPreAllocatedTopHeight | `false`  | Optional. Boolean flag to enable setting the host property 'preAllocatedApplicationCustomizerTopHeight' when saving new banner height within the settings panel. This flag signals SharePoint to pre allocate the banner location height server-side to avoid the page shifting down during render. 
 
 Additionally, if you are a site owner or site collection adminstrator, you can customize the banner using the 'edit' pencil icon via the browser.
 

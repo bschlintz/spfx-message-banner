@@ -21,6 +21,7 @@ const DEFAULT_PROPERTIES: IMessageBannerProperties = {
   textFontSizePx: 16,
   bannerHeightPx: 30,
   visibleStartDate: null,
+  enableSetPreAllocatedTopHeight: false
 };
 
 /** A Custom Action which can be run during execution of a Client Side Application */

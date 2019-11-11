@@ -11,7 +11,6 @@ import isPast from 'date-fns/isPast';
 import formatDate from 'date-fns/format';
 import { Text } from '@microsoft/sp-core-library';
 
-const EXPERIMENTAL_ENABLE_PREALLOCATEDTOPHEIGHT = true;
 const BANNER_CONTAINER_ID = 'CustomMessageBannerContainer';
 
 const Banner = (props: IBannerProps) => {
@@ -20,7 +19,8 @@ const Banner = (props: IBannerProps) => {
   const [isSaving, setIsSaving] = useState(false);
 
   useEffect(() => {
-    if (EXPERIMENTAL_ENABLE_PREALLOCATEDTOPHEIGHT) {
+    // Adjust pre allocated parent container height for previewing
+    if (props.settings.enableSetPreAllocatedTopHeight) {
       document.getElementById(BANNER_CONTAINER_ID).parentElement.style.height = `${settings.bannerHeightPx}px`;
     }
   }, [settings.bannerHeightPx]);
@@ -44,7 +44,8 @@ const Banner = (props: IBannerProps) => {
     try {
       setIsSaving(true);
       let hostProperties = null;
-      if (EXPERIMENTAL_ENABLE_PREALLOCATEDTOPHEIGHT) {
+      // Set host property 'preAllocatedApplicationCustomizerTopHeight' when saving custom action properties
+      if (props.settings.enableSetPreAllocatedTopHeight) {
         hostProperties = { "preAllocatedApplicationCustomizerTopHeight": `${settings.bannerHeightPx}`};
       }
       await props.clientSideComponentService.setProperties(settings, hostProperties);
@@ -75,7 +76,7 @@ const Banner = (props: IBannerProps) => {
   };
 
 
-  //If user isn't an admin and there is a future start date, render nothing
+  //If user isn't an admin and there is a future start date and it hasn't yet occurred, render nothing
   if (visibleStartDate && !isPastVisibleStartDate && !isCurrentUserAdmin) return null;
 
   return (

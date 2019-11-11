@@ -13,7 +13,6 @@ define([], function() {
     "BannerPanelFieldVisibleStartDateLabel": "Scheduled Start Date",
     "BannerPanelFieldVisibleStartDateEnabledLabel": "On",
     "BannerPanelFieldVisibleStartDateDisabledLabel": "Off",
-    // "BannerPanelFieldVisibleEndDateLabel": "Hide On",
     "BannerPanelButtonSaveText": "Save",
     "BannerPanelButtonCancelText": "Cancel",
   }
