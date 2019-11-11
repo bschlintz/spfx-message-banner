@@ -7,4 +7,5 @@ export interface IBannerPanelProps {
   onSave: () => Promise<void>;
   onCancelOrDismiss: () => void;
   onFieldChange: (newSetting: {[ key: string ]: any }) => void;
+  resetToDefaults: () => void;
 }

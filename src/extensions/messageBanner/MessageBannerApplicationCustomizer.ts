@@ -10,19 +10,9 @@ import * as strings from 'MessageBannerApplicationCustomizerStrings';
 import Banner from './components/Banner/Banner';
 import { IBannerProps } from './components/Banner/IBannerProps';
 import ClientSideComponentService from '../../services/ClientSideComponentService';
-import { IMessageBannerProperties } from '../../models/IMessageBannerProperties';
+import { IMessageBannerProperties, DEFAULT_PROPERTIES } from '../../models/IMessageBannerProperties';
 
 const LOG_SOURCE: string = 'MessageBannerApplicationCustomizer';
-
-const DEFAULT_PROPERTIES: IMessageBannerProperties = {
-  message: "This is a sample banner message. Click the edit icon on the right side to update the banner settings.",
-  textColor: "#333333",
-  backgroundColor: "#ffffc6",
-  textFontSizePx: 16,
-  bannerHeightPx: 30,
-  visibleStartDate: null,
-  enableSetPreAllocatedTopHeight: false
-};
 
 /** A Custom Action which can be run during execution of a Client Side Application */
 export default class MessageBannerApplicationCustomizer

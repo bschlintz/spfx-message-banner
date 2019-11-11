@@ -10,10 +10,12 @@ import SPPermission from '@microsoft/sp-page-context/lib/SPPermission';
 import isPast from 'date-fns/isPast';
 import formatDate from 'date-fns/format';
 import { Text } from '@microsoft/sp-core-library';
+import { DEFAULT_PROPERTIES } from '../../../../models/IMessageBannerProperties';
 
 const BANNER_CONTAINER_ID = 'CustomMessageBannerContainer';
 
 const Banner = (props: IBannerProps) => {
+  const [defaultSettings, setDefaultSettings] = useState(props.settings);
   const [settings, setSettings] = useState(props.settings);
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
@@ -36,7 +38,7 @@ const Banner = (props: IBannerProps) => {
   const handleCancelOrDismiss = (): void => {
     if (!isSaving) {
       setIsPanelOpen(false);
-      setSettings(props.settings); //return to original settings
+      setSettings(defaultSettings); //return to original settings
     }
   };
 
@@ -51,6 +53,7 @@ const Banner = (props: IBannerProps) => {
       await props.clientSideComponentService.setProperties(settings, hostProperties);
       setIsPanelOpen(false);
       setIsSaving(false);
+      setDefaultSettings(settings);
     }
     catch (error) {
       console.log(`Unable to set custom action properties. ${error.message}`, error);
@@ -60,6 +63,11 @@ const Banner = (props: IBannerProps) => {
   const handleFieldChange = (newSetting: {[ key: string ]: any }): void => {
     const newSettings = { ...settings, ...newSetting };
     setSettings(newSettings);
+  };
+
+  const resetToDefaults = (): void => {
+    const mergedDefaultSettings = { ...settings, ...DEFAULT_PROPERTIES };
+    setSettings(mergedDefaultSettings);
   };
 
   const parseTokens = (textWithTokens: string, context: BaseComponentContext): string => {
@@ -103,6 +111,7 @@ const Banner = (props: IBannerProps) => {
           onCancelOrDismiss={handleCancelOrDismiss}
           onFieldChange={handleFieldChange}
           onSave={handleSave}
+          resetToDefaults={resetToDefaults}
           settings={settings}
         />
       </div>

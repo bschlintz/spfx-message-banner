@@ -32,5 +32,16 @@
     & > * {
       margin-right: 8px;
     }
+
+    .ResetToDefaults {
+      font-size: 12px;
+      text-align: right;
+
+      &:hover {
+        cursor: pointer;
+        color: #999;
+        text-decoration: underline;
+      }
+    }
   }
 }

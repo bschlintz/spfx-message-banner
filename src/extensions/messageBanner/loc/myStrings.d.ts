@@ -14,6 +14,7 @@ declare interface IMessageBannerApplicationCustomizerStrings {
   BannerPanelFieldVisibleStartDateDisabledLabel: string;
   BannerPanelButtonSaveText: string;
   BannerPanelButtonCancelText: string;
+  BannerPanelButtonResetToDefaultsText: string;
 }
 
 declare module 'MessageBannerApplicationCustomizerStrings' {

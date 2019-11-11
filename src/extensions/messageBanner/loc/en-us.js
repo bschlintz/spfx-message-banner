@@ -15,5 +15,6 @@ define([], function() {
     "BannerPanelFieldVisibleStartDateDisabledLabel": "Off",
     "BannerPanelButtonSaveText": "Save",
     "BannerPanelButtonCancelText": "Cancel",
+    "BannerPanelButtonResetToDefaultsText": "Reset to defaults",
   }
 });

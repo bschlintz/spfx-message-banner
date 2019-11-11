@@ -55,6 +55,7 @@ const BannerPanel = (props: IBannerPanelProps) => {
           <PrimaryButton onClick={props.onSave} disabled={props.isSaving}>{strings.BannerPanelButtonSaveText}</PrimaryButton>
           <DefaultButton onClick={props.onCancelOrDismiss} disabled={props.isSaving}>{strings.BannerPanelButtonCancelText}</DefaultButton>
           {props.isSaving && <Spinner size={SpinnerSize.small} />}
+          <div className={styles.ResetToDefaults} onClick={props.resetToDefaults}>{strings.BannerPanelButtonResetToDefaultsText}</div>
         </div>
       )}
     >
@@ -65,7 +66,7 @@ const BannerPanel = (props: IBannerPanelProps) => {
           <TextField
             multiline={true}
             rows={5}
-            defaultValue={props.settings.message}
+            value={props.settings.message}
             className={styles.SwatchColorPicker}
             onChange={(e, value) => props.onFieldChange({ message: value })}
           />
@@ -99,14 +100,14 @@ const BannerPanel = (props: IBannerPanelProps) => {
 
         <div className={styles.FieldSection}>
           <Label className={styles.FieldLabel}>{strings.BannerPanelFieldTextSizeLabel}</Label>
-          <Slider min={14} max={50} step={2} defaultValue={props.settings.textFontSizePx} showValue={true}
+          <Slider min={14} max={50} step={2} value={props.settings.textFontSizePx} showValue={true}
             onChange={(value) => props.onFieldChange({ textFontSizePx: value })}
           />
         </div>
 
         <div className={styles.FieldSection}>
           <Label className={styles.FieldLabel}>{strings.BannerPanelFieldBannerHeightLabel}</Label>
-          <Slider min={20} max={80} step={2} defaultValue={props.settings.bannerHeightPx} showValue={true}
+          <Slider min={20} max={80} step={2} value={props.settings.bannerHeightPx} showValue={true}
             onChange={(value) => props.onFieldChange({ bannerHeightPx: value })}
           />
         </div>
@@ -114,7 +115,7 @@ const BannerPanel = (props: IBannerPanelProps) => {
         <div className={styles.FieldSection}>
           <Label className={styles.FieldLabel}>{strings.BannerPanelFieldVisibleStartDateLabel}</Label>
           <Toggle
-            defaultChecked={props.settings.visibleStartDate !== null}
+            checked={props.settings.visibleStartDate !== null}
             onText={strings.BannerPanelFieldVisibleStartDateEnabledLabel}
             offText={strings.BannerPanelFieldVisibleStartDateDisabledLabel}
             onChange={(ev, value) => props.onFieldChange({ visibleStartDate: value ? new Date() : null })}
