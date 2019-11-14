@@ -33,7 +33,7 @@ __View as site admin with a scheduled start date__
    Add-PnPCustomAction -Title "CustomMessageBanner" -Name "CustomMessageBanner" -Location "ClientSideExtension.ApplicationCustomizer" -ClientSideComponentId "1e2688c4-99d8-4897-8871-a9c151ccfc87" -ClientSideComponentProperties "{`"message`":`"Sample site-scoped message banner text.`"}" -Scope Site
 
    #Web Scoped
-   Add-PnPCustomAction -Title "CustomMessageBanner" -Name "CustomMessageBanner" -Location "ClientSideExtension.ApplicationCustomizer" -ClientSideComponentId "1e2688c4-99d8-4897-8871-a9c151ccfc87" -ClientSideComponentProperties "{`"message`":`"Sample web-scoped message banner text.`"}" -Scope Site
+   Add-PnPCustomAction -Title "CustomMessageBanner" -Name "CustomMessageBanner" -Location "ClientSideExtension.ApplicationCustomizer" -ClientSideComponentId "1e2688c4-99d8-4897-8871-a9c151ccfc87" -ClientSideComponentProperties "{`"message`":`"Sample web-scoped message banner text.`"}" -Scope Web
    ```
 
    #### Office 365 CLI
