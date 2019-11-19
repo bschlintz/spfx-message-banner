@@ -71,6 +71,37 @@ Additionally, if you are a site owner or site collection administrator, you can 
 
 ![External Sharing Banner Screenshot](./docs/BannerSettingsPanel.png)
 
+## Removal
+
+### Uninstall from a Site or Web
+1. Unregister the SPFx extension on your target SharePoint site(s) using one of the methods below.
+   #### PnP PowerShell
+   ```powershell
+   Connect-PnPOnline -Url "https://tenant.sharepoint.com/sites/target"
+   
+   #Site Collection Scoped
+   Get-PnPCustomAction -Scope Site | Where-Object { $_.ClientSideComponentId -eq "1e2688c4-99d8-4897-8871-a9c151ccfc87" } | Remove-PnPCustomAction
+
+   #Web Scoped
+   Get-PnPCustomAction -Scope Web | Where-Object { $_.ClientSideComponentId -eq "1e2688c4-99d8-4897-8871-a9c151ccfc87" } | Remove-PnPCustomAction
+   ```
+
+   #### Office 365 CLI
+   ```bash
+   o365 spo login https://tenant.sharepoint.com/sites/target
+   
+   #Site Collection Scoped - Get Custom Action ID
+   o365 spo customaction list --url 'https://tenant.sharepoint.com/sites/target' --scope Site   
+   #Site Collection Scoped - Remove by Custom Action ID
+   o365 spo customaction remove --id '<CUSTOM ACTION ID OF BANNER FROM PREVIOUS STEP>' --url 'https://tenant.sharepoint.com/sites/target' --scope Site
+
+
+   #Web Scoped - Get Custom Action ID
+   o365 spo customaction list --url 'https://tenant.sharepoint.com/sites/target' --scope Web   
+   #Web Scoped - Remove by Custom Action ID
+   o365 spo customaction remove --id '<CUSTOM ACTION ID OF BANNER FROM PREVIOUS STEP>' --url 'https://tenant.sharepoint.com/sites/target' --scope Web
+   ```
+
 ## Disclaimer
 
 Microsoft provides programming examples for illustration only, without warranty either expressed or implied, including, but not limited to, the implied warranties of merchantability and/or fitness for a particular purpose. We grant You a nonexclusive, royalty-free right to use and modify the Sample Code and to reproduce and distribute the object code form of the Sample Code, provided that You agree: (i) to not use Our name, logo, or trademarks to market Your software product in which the Sample Code is embedded; (ii) to include a valid copyright notice on Your software product in which the Sample Code is embedded; and (iii) to indemnify, hold harmless, and defend Us and Our suppliers from and against any claims or lawsuits, including attorneys' fees, that arise or result from the use or distribution of the Sample Code.
