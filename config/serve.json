@@ -13,7 +13,10 @@
             "textColor": "#333",
             "backgroundColor": "#ffffc6",
             "textFontSizePx": 14,
-            "bannerHeightPx": 30
+            "bannerHeightPx": 30,
+            "visibleStartDate": null,
+            "enableSetPreAllocatedTopHeight": false,
+            "disableSiteAdminUI": false
           }
         }
       }
