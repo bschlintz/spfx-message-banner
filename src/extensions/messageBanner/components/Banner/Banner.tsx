@@ -84,13 +84,15 @@ const Banner = (props: IBannerProps) => {
   };
 
 
-  //If user isn't an admin and there is a future start date and it hasn't yet occurred, render nothing
-  if (visibleStartDate && !isPastVisibleStartDate && !isCurrentUserAdmin) return null;
+  //If there is a future start date and it hasn't yet occurred,
+  // and either the current user isn't an admin or the user is an admin but the disableSiteAdminUI flag is set,
+  // then render nothing
+  if (visibleStartDate && !isPastVisibleStartDate && (!isCurrentUserAdmin || settings.disableSiteAdminUI)) return null;
 
   return (
     <div id={BANNER_CONTAINER_ID} style={{ backgroundColor: settings.backgroundColor }}>
       <div className={styles.BannerContainer} style={{ height: settings.bannerHeightPx }}>
-        {isCurrentUserAdmin && !!visibleStartDate && (isPastVisibleStartDate
+        {!settings.disableSiteAdminUI && isCurrentUserAdmin && !!visibleStartDate && (isPastVisibleStartDate
           ? <div className={styles.AdminUserVisibilityBadge}>{strings.BannerBadgeIsVisibleToUsersMessage}</div>
           : <div className={styles.AdminUserVisibilityBadge}>{Text.format(strings.BannerBadgeNotVisibleToUsersMessage, formatDate(visibleStartDate, 'PPPP'))}</div>
         )}
@@ -98,22 +100,23 @@ const Banner = (props: IBannerProps) => {
           dangerouslySetInnerHTML={{__html: parseTokens(settings.message, props.context)}}
           style={{ color: settings.textColor, fontSize: settings.textFontSizePx }}>
         </div>
-        {isCurrentUserAdmin && (
+        {!settings.disableSiteAdminUI && isCurrentUserAdmin && (
           <IconButton
             iconProps={{ iconName: 'Edit', styles: { root: { color: settings.textColor}}}}
             onClick={handleOpenClick}
             className={styles.EditButtonIcon}
           />
         )}
-        <BannerPanel
-          isOpen={isPanelOpen}
-          isSaving={isSaving}
-          onCancelOrDismiss={handleCancelOrDismiss}
-          onFieldChange={handleFieldChange}
-          onSave={handleSave}
-          resetToDefaults={resetToDefaults}
-          settings={settings}
-        />
+        {!settings.disableSiteAdminUI && (<BannerPanel
+            isOpen={isPanelOpen}
+            isSaving={isSaving}
+            onCancelOrDismiss={handleCancelOrDismiss}
+            onFieldChange={handleFieldChange}
+            onSave={handleSave}
+            resetToDefaults={resetToDefaults}
+            settings={settings}
+          />
+        )}
       </div>
     </div>
   );

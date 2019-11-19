@@ -33,7 +33,7 @@ __View as site admin with a scheduled start date__
    Add-PnPCustomAction -Title "CustomMessageBanner" -Name "CustomMessageBanner" -Location "ClientSideExtension.ApplicationCustomizer" -ClientSideComponentId "1e2688c4-99d8-4897-8871-a9c151ccfc87" -ClientSideComponentProperties "{`"message`":`"Sample site-scoped message banner text.`"}" -Scope Site
 
    #Web Scoped
-   Add-PnPCustomAction -Title "CustomMessageBanner" -Name "CustomMessageBanner" -Location "ClientSideExtension.ApplicationCustomizer" -ClientSideComponentId "1e2688c4-99d8-4897-8871-a9c151ccfc87" -ClientSideComponentProperties "{`"message`":`"Sample web-scoped message banner text.`"}" -Scope Site
+   Add-PnPCustomAction -Title "CustomMessageBanner" -Name "CustomMessageBanner" -Location "ClientSideExtension.ApplicationCustomizer" -ClientSideComponentId "1e2688c4-99d8-4897-8871-a9c151ccfc87" -ClientSideComponentProperties "{`"message`":`"Sample web-scoped message banner text.`"}" -Scope Web
    ```
 
    #### Office 365 CLI
@@ -65,11 +65,43 @@ The banner settings are saved into the ClientSideComponentProperties on the cust
 | textFontSizePx | `14` | Font size of the banner text in pixels. |
 | bannerHeightPx | `30` | Height of the banner in pixels. |
 | visibleStartDate | `null`  | Optional. Date string at which the banner message should be shown to members and visitors of the site. Message will always be visible to admins.
+| disableSiteAdminUI | `false` | Optional. Boolean flag to disable the site administrator user interface (edit icon). Additionally, if the `visibleStartDate` property is set to a future date, site administrators will no longer see the banner with the future visibility date badge.
 | enableSetPreAllocatedTopHeight | `false`  | Optional. Boolean flag to enable setting the host property 'preAllocatedApplicationCustomizerTopHeight' when saving new banner height within the settings panel. This flag signals SharePoint to pre allocate the banner location height server-side to avoid the page shifting down during render. 
 
 Additionally, if you are a site owner or site collection administrator, you can customize the banner using the 'edit' pencil icon via the browser.
 
 ![External Sharing Banner Screenshot](./docs/BannerSettingsPanel.png)
+
+## Removal
+
+### Uninstall from a Site or Web
+1. Unregister the SPFx extension on your target SharePoint site(s) using one of the methods below.
+   #### PnP PowerShell
+   ```powershell
+   Connect-PnPOnline -Url "https://tenant.sharepoint.com/sites/target"
+   
+   #Site Collection Scoped
+   Get-PnPCustomAction -Scope Site | Where-Object { $_.ClientSideComponentId -eq "1e2688c4-99d8-4897-8871-a9c151ccfc87" } | Remove-PnPCustomAction
+
+   #Web Scoped
+   Get-PnPCustomAction -Scope Web | Where-Object { $_.ClientSideComponentId -eq "1e2688c4-99d8-4897-8871-a9c151ccfc87" } | Remove-PnPCustomAction
+   ```
+
+   #### Office 365 CLI
+   ```bash
+   o365 spo login https://tenant.sharepoint.com/sites/target
+   
+   #Site Collection Scoped - Get Custom Action ID
+   o365 spo customaction list --url 'https://tenant.sharepoint.com/sites/target' --scope Site   
+   #Site Collection Scoped - Remove by Custom Action ID
+   o365 spo customaction remove --id '<CUSTOM ACTION ID OF BANNER FROM PREVIOUS STEP>' --url 'https://tenant.sharepoint.com/sites/target' --scope Site
+
+
+   #Web Scoped - Get Custom Action ID
+   o365 spo customaction list --url 'https://tenant.sharepoint.com/sites/target' --scope Web   
+   #Web Scoped - Remove by Custom Action ID
+   o365 spo customaction remove --id '<CUSTOM ACTION ID OF BANNER FROM PREVIOUS STEP>' --url 'https://tenant.sharepoint.com/sites/target' --scope Web
+   ```
 
 ## Disclaimer
 

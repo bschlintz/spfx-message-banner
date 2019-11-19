@@ -4,8 +4,9 @@ export interface IMessageBannerProperties {
   backgroundColor: string;
   textFontSizePx: number;
   bannerHeightPx: number;
-  visibleStartDate?: string;
-  enableSetPreAllocatedTopHeight?: boolean;
+  visibleStartDate: string;
+  enableSetPreAllocatedTopHeight: boolean;
+  disableSiteAdminUI: boolean;
 }
 
 export const DEFAULT_PROPERTIES: IMessageBannerProperties = {
@@ -14,5 +15,7 @@ export const DEFAULT_PROPERTIES: IMessageBannerProperties = {
   backgroundColor: "#ffffc6",
   textFontSizePx: 16,
   bannerHeightPx: 30,
-  visibleStartDate: null
+  visibleStartDate: null,
+  enableSetPreAllocatedTopHeight: false,
+  disableSiteAdminUI: false,
 };
