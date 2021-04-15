@@ -1,4 +1,4 @@
-## Custom Message Banner for Modern SharePoint Sites
+## Custom Message Banner for Modern SharePoint Sites (2019 support)
 
 Add a custom banner message to your SharePoint Online modern sites. Allows a site owner to modify the text, font size, colors and height of the banner. Specify a start date to control when the banner is visible to members of a site. Experimental support for setting the custom action host property 'preAllocatedApplicationCustomizerTopHeight' to avoid the page shifting upon load.
 
