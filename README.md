@@ -21,7 +21,7 @@ __View as site admin with a scheduled start date__
 - PnP PowerShell or Office 365 CLI: Ensure you have the latest version of the [SharePointPnPPowerShellOnline](https://docs.microsoft.com/en-us/powershell/sharepoint/sharepoint-pnp/sharepoint-pnp-cmdlets?view=sharepoint-ps) module installed. Alternatively, you can use the [Office 365 CLI](https://pnp.github.io/office365-cli/).
 
 ### Installation
-1. Download the SPFx package [message-banner.sppkg](https://github.com/bschlintz/spfx-message-banner/blob/master/sharepoint/solution/message-banner.sppkg) file from Github (or clone the repo and build the package yourself)
+1. Download the SPFx package [message-banner.sppkg](https://github.com/bschlintz/spfx-message-banner/raw/sp2019/sharepoint/solution/message-banner.sppkg) file from Github (or clone the repo and build the package yourself)
 2. Upload sppkg file to the 'Apps for SharePoint' library in your Tenant App Catalog
 3. Click the 'Make this solution available to all sites in your organization' checkbox and then click Deploy
 4. Register the SPFx extension on your target SharePoint site(s) using one of the methods below.
