@@ -12,7 +12,7 @@ import { IBannerProps } from './components/Banner/IBannerProps';
 import ClientSideComponentService from '../../services/ClientSideComponentService';
 import { IMessageBannerProperties, DEFAULT_PROPERTIES } from '../../models/IMessageBannerProperties';
 
-const LOG_SOURCE: string = 'MessageBannerApplicationCustomizer';
+const LOG_SOURCE = 'MessageBannerApplicationCustomizer';
 
 /** A Custom Action which can be run during execution of a Client Side Application */
 export default class MessageBannerApplicationCustomizer
