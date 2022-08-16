@@ -5,7 +5,7 @@
       "name": "Hosted workbench",
       "type": "pwa-chrome",
       "request": "launch",
-      "url": "https://beisdevpme5.sharepoint.com/sites/restoreDocs/_layouts/workbench.aspx",
+      "url": "https://contoso.sharepoint.com/sites/mySite/_layouts/workbench.aspx",
       "webRoot": "${workspaceRoot}",
       "sourceMaps": true,
       "sourceMapPathOverrides": {
