@@ -6,11 +6,14 @@ import { IconButton } from 'office-ui-fabric-react/lib/Button';
 import BannerPanel from '../BannerPanel/BannerPanel';
 import * as strings from 'MessageBannerApplicationCustomizerStrings';
 import { BaseComponentContext } from '@microsoft/sp-component-base';
-import SPPermission from '@microsoft/sp-page-context/lib/SPPermission';
+import { SPPermission } from '@microsoft/sp-page-context';
 import isPast from 'date-fns/isPast';
 import formatDate from 'date-fns/format';
 import { Text } from '@microsoft/sp-core-library';
+
 import { DEFAULT_PROPERTIES } from '../../../../models/IMessageBannerProperties';
+import { IHostProperties } from '../../../../models/IHostProperties';
+
 
 const BANNER_CONTAINER_ID = 'CustomMessageBannerContainer';
 
@@ -29,7 +32,7 @@ const Banner = (props: IBannerProps) => {
 
   const visibleStartDate = settings.visibleStartDate ? new Date(settings.visibleStartDate) : null;
   const isPastVisibleStartDate = settings.visibleStartDate && isPast(visibleStartDate);
-  const isCurrentUserAdmin = props.context.pageContext.web.permissions.hasPermission(SPPermission.manageWeb as any);
+  const isCurrentUserAdmin = props.context.pageContext.web.permissions.hasPermission(SPPermission.manageWeb);
 
   const handleOpenClick = (): void => {
     setIsPanelOpen(true);
@@ -45,10 +48,10 @@ const Banner = (props: IBannerProps) => {
   const handleSave = async (): Promise<void> => {
     try {
       setIsSaving(true);
-      let hostProperties = null;
+      const hostProperties : IHostProperties = {};
       // Set host property 'preAllocatedApplicationCustomizerTopHeight' when saving custom action properties
       if (props.settings.enableSetPreAllocatedTopHeight) {
-        hostProperties = { "preAllocatedApplicationCustomizerTopHeight": `${settings.bannerHeightPx}`};
+          hostProperties.preAllocatedApplicationCustomizerTopHeight = settings.bannerHeightPx;
       }
       await props.clientSideComponentService.setProperties(settings, hostProperties);
       setIsPanelOpen(false);
@@ -60,7 +63,7 @@ const Banner = (props: IBannerProps) => {
     }
   };
 
-  const handleFieldChange = (newSetting: {[ key: string ]: any }): void => {
+  const handleFieldChange = (newSetting: {[ key: string ]: unknown }): void => {
     const newSettings = { ...settings, ...newSetting };
     setSettings(newSettings);
   };
@@ -98,8 +101,7 @@ const Banner = (props: IBannerProps) => {
         )}
         <div
           dangerouslySetInnerHTML={{__html: parseTokens(settings.message, props.context)}}
-          style={{ color: settings.textColor, fontSize: settings.textFontSizePx }}>
-        </div>
+          style={{ color: settings.textColor, fontSize: settings.textFontSizePx }} />
         {!settings.disableSiteAdminUI && isCurrentUserAdmin && (
           <IconButton
             iconProps={{ iconName: 'Edit', styles: { root: { color: settings.textColor}}}}

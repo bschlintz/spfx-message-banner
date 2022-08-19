@@ -1,6 +1,8 @@
 import { SPHttpClient } from "@microsoft/sp-http";
 import { ApplicationCustomizerContext } from "@microsoft/sp-application-base";
 import { ICustomAction } from "../models/ICustomAction";
+import { IMessageBannerProperties } from "../models/IMessageBannerProperties";
+import { IHostProperties } from "../models/IHostProperties";
 
 class ClientSideComponentService {
   private _context: ApplicationCustomizerContext;
@@ -9,13 +11,13 @@ class ClientSideComponentService {
     this._context = context;
   }
 
-  public setProperties = async (properties?: any, hostProperties?: any): Promise<void> => {
+  public setProperties = async (properties?: IMessageBannerProperties, hostProperties?: IHostProperties): Promise<void> => {
     const componentId = this._context.manifest.id;
-    let customAction = await this._getCustomActionByComponentId(componentId);
+    const customAction = await this._getCustomActionByComponentId(componentId);
     if (!customAction) return;
 
     try {
-      let body = {};
+      const body : { [key: string]: string} = {} ;
       if (properties)     body["ClientSideComponentProperties"] = JSON.stringify(properties);
       if (hostProperties) body["HostProperties"] = JSON.stringify(hostProperties);
 
@@ -72,9 +74,8 @@ class ClientSideComponentService {
     catch (error) {
       console.log(`ERROR: Unable to fetch custom action with ClientSideComponentId ${componentId}. ${error.message}`);
     }
-    finally {
-      return result;
-    }
+
+    return result;
   }
 }
 
